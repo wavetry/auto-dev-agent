@@ -5,21 +5,25 @@
   "type": "module",
   "main": "dist/cli.js",
   "bin": {
-    "auto-dev-agent": "dist/cli.js"
+    "ada": "dist/cli.js"
   },
   "scripts": {
     "build": "tsc",
     "start": "node dist/cli.js",
-    "dev": "tsx src/cli.ts"
+    "dev": "tsx src/cli.ts",
+    "bundle": "esbuild src/cli.ts --bundle --platform=node --target=node18 --format=cjs --outfile=bundle/cli.cjs",
+    "pack:win": "npm run bundle && pkg bundle/cli.cjs --targets node18-win-x64 --output release/ada.exe"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0",
-    "commander": "^13.0.0",
-    "chalk": "^5.4.0"
+    "chalk": "^5.4.0",
+    "commander": "^13.0.0"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
-    "typescript": "^5.7.0",
-    "tsx": "^4.19.0"
+    "@yao-pkg/pkg": "^6.14.1",
+    "esbuild": "^0.27.3",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
   }
 }

@@ -11,7 +11,7 @@ import { readProgressRaw } from "./utils/progress.js";
 const program = new Command();
 
 program
-  .name("auto-dev-agent")
+  .name("ada")
   .description(
     "Autonomous long-running development agent. Inspired by Anthropic's approach to effective harnesses for long-running agents."
   )
