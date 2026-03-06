@@ -55,6 +55,23 @@ export ANTHROPIC_API_KEY=sk-ant-xxxxx
 
 也可以通过 `--api-key` 参数直接传入。
 
+### 第三方 API 提供商（阿里云百炼等）
+
+如果使用第三方 Anthropic 兼容 API，需要额外设置 base URL：
+
+```bash
+# Windows CMD
+set ANTHROPIC_BASE_URL=https://coding.dashscope.aliyuncs.com/apps/anthropic
+
+# Windows PowerShell
+$env:ANTHROPIC_BASE_URL="https://coding.dashscope.aliyuncs.com/apps/anthropic"
+
+# Linux / Mac
+export ANTHROPIC_BASE_URL=https://coding.dashscope.aliyuncs.com/apps/anthropic
+```
+
+也可以通过 `--base-url` 参数直接传入。
+
 ## 命令一览
 
 | 命令 | 说明 |
@@ -82,6 +99,7 @@ npx tsx src/cli.ts run \
 | `--spec <spec>` | 是 | - | 项目需求描述，可以是字符串或文件路径 |
 | `--project-dir <dir>` | 否 | 当前目录 | 目标项目的生成目录 |
 | `--api-key <key>` | 否 | 环境变量 | Anthropic API Key |
+| `--base-url <url>` | 否 | 环境变量 | API base URL（第三方提供商如阿里云百炼） |
 | `--model <model>` | 否 | `claude-sonnet-4-20250514` | 使用的模型 |
 | `--max-sessions <n>` | 否 | `50` | 最大会话数 |
 | `--max-tokens <n>` | 否 | `100000` | 每个会话的 token 上限 |
@@ -156,6 +174,8 @@ Files changed: src/routes/auth.js, src/models/user.js
 
 ## 完整示例
 
+### 使用 Anthropic 官方 API
+
 ```bash
 cd F:\git\auto-dev-agent
 
@@ -166,6 +186,32 @@ npx tsx src/cli.ts run ^
   --project-dir F:\git\bookmark-api ^
   --max-sessions 30 ^
   --test-url http://localhost:3000
+```
+
+### 使用阿里云百炼等第三方 API
+
+```bash
+cd F:\git\auto-dev-agent
+
+set ANTHROPIC_API_KEY=你的百炼API-KEY
+set ANTHROPIC_BASE_URL=https://coding.dashscope.aliyuncs.com/apps/anthropic
+
+npx tsx src/cli.ts run ^
+  --spec "构建一个 Todo REST API，支持增删改查、分页、JWT鉴权" ^
+  --project-dir F:\git\todo-api ^
+  --model glm-5 ^
+  --max-sessions 30
+```
+
+也可以直接通过参数传入：
+
+```bash
+npx tsx src/cli.ts run ^
+  --spec "你的需求" ^
+  --project-dir F:\git\目标项目 ^
+  --base-url https://coding.dashscope.aliyuncs.com/apps/anthropic ^
+  --api-key 你的API-KEY ^
+  --model glm-5
 ```
 
 ## 运行流程
