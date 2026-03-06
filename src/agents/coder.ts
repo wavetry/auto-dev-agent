@@ -21,7 +21,11 @@ export async function runCoderAgent(
   config: AgentConfig,
   sessionNumber: number
 ): Promise<CoderResult> {
-  const client = new Anthropic({ apiKey: config.apiKey });
+  const clientOpts: Record<string, any> = { apiKey: config.apiKey };
+  if (config.baseUrl) {
+    clientOpts.baseURL = config.baseUrl;
+  }
+  const client = new Anthropic(clientOpts);
   const tools = getToolDefinitions();
 
   console.log(chalk.blue(`\n=== Coding Agent Session ${sessionNumber} ===`));

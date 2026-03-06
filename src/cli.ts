@@ -24,6 +24,7 @@ program
   .requiredOption("--spec <spec>", "Project specification / requirements (string or file path)")
   .option("--project-dir <dir>", "Target project directory", process.cwd())
   .option("--api-key <key>", "Anthropic API key (or set ANTHROPIC_API_KEY env var)")
+  .option("--base-url <url>", "API base URL (for third-party providers like Aliyun Bailian)")
   .option("--model <model>", "Model to use", "claude-sonnet-4-20250514")
   .option("--max-sessions <n>", "Maximum number of sessions", "50")
   .option("--max-tokens <n>", "Max tokens per session", "100000")
@@ -43,6 +44,7 @@ program
 
       const config = loadConfig({
         apiKey: opts.apiKey,
+        baseUrl: opts.baseUrl,
         model: opts.model,
         maxSessions: parseInt(opts.maxSessions, 10),
         maxTokensPerSession: parseInt(opts.maxTokens, 10),
@@ -120,6 +122,7 @@ program
   .description("Resume development from the current project state")
   .option("--project-dir <dir>", "Target project directory", process.cwd())
   .option("--api-key <key>", "Anthropic API key")
+  .option("--base-url <url>", "API base URL (for third-party providers)")
   .option("--model <model>", "Model to use", "claude-sonnet-4-20250514")
   .option("--max-sessions <n>", "Maximum number of sessions", "50")
   .option("--max-tokens <n>", "Max tokens per session", "100000")
@@ -131,6 +134,7 @@ program
 
       const config = loadConfig({
         apiKey: opts.apiKey,
+        baseUrl: opts.baseUrl,
         model: opts.model,
         maxSessions: parseInt(opts.maxSessions, 10),
         maxTokensPerSession: parseInt(opts.maxTokens, 10),

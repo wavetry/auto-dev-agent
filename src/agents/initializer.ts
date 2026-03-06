@@ -14,7 +14,11 @@ import {
 export async function runInitializerAgent(
   config: AgentConfig
 ): Promise<{ success: boolean; error?: string }> {
-  const client = new Anthropic({ apiKey: config.apiKey });
+  const clientOpts: Record<string, any> = { apiKey: config.apiKey };
+  if (config.baseUrl) {
+    clientOpts.baseURL = config.baseUrl;
+  }
+  const client = new Anthropic(clientOpts);
   const tools = getToolDefinitions();
 
   console.log(chalk.blue("\n=== Initializer Agent Starting ==="));

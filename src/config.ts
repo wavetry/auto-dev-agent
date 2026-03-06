@@ -4,6 +4,8 @@ import fs from "node:fs";
 export interface AgentConfig {
   /** Anthropic API key */
   apiKey: string;
+  /** API base URL (for third-party providers like Aliyun Bailian) */
+  baseUrl: string;
   /** Model to use, e.g. "claude-sonnet-4-20250514" */
   model: string;
   /** Maximum number of sessions (context windows) to run */
@@ -27,6 +29,7 @@ export interface AgentConfig {
 }
 
 const DEFAULTS: Partial<AgentConfig> = {
+  baseUrl: "",
   model: "claude-sonnet-4-20250514",
   maxSessions: 50,
   maxTokensPerSession: 100000,
@@ -45,6 +48,11 @@ export function loadConfig(overrides: Partial<AgentConfig> = {}): AgentConfig {
   const apiKey =
     overrides.apiKey ||
     process.env.ANTHROPIC_API_KEY ||
+    "";
+
+  const baseUrl =
+    overrides.baseUrl ||
+    process.env.ANTHROPIC_BASE_URL ||
     "";
 
   if (!apiKey) {
@@ -71,6 +79,7 @@ export function loadConfig(overrides: Partial<AgentConfig> = {}): AgentConfig {
     ...fileConfig,
     ...overrides,
     apiKey,
+    baseUrl,
     projectDir,
     projectSpec: overrides.projectSpec || fileConfig.projectSpec || "",
   } as AgentConfig;
