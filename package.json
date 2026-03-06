@@ -1,0 +1,25 @@
+{
+  "name": "auto-dev-agent",
+  "version": "1.0.0",
+  "description": "Autonomous long-running development agent with incremental progress across sessions",
+  "type": "module",
+  "main": "dist/cli.js",
+  "bin": {
+    "auto-dev-agent": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/cli.js",
+    "dev": "tsx src/cli.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "commander": "^13.0.0",
+    "chalk": "^5.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0",
+    "tsx": "^4.19.0"
+  }
+}
