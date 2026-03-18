@@ -1,0 +1,48 @@
+# Source files (not needed in installed package)
+src/
+
+# Build artifacts (will be generated during install)
+dist/
+bundle/
+release/
+
+# Development files
+*.log
+*.txt
+!LICENSE
+!README.md
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Test files
+*.test.ts
+*.spec.ts
+__tests__/
+test/
+tests/
+
+# Documentation
+AGENTS.md
+WORKFLOW.md
+spec.txt
+
+# Config files not needed for runtime
+tsconfig.json
+.eslintrc*
+.prettierrc*
+.editorconfig
+.lintstagedrc*
+
+# Scripts
+*.sh
+!run.sh

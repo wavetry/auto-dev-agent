@@ -4,15 +4,33 @@
   "description": "Autonomous long-running development agent with incremental progress across sessions",
   "type": "module",
   "main": "dist/cli.js",
+  "types": "dist/cli.d.ts",
   "bin": {
-    "ada": "dist/cli.js"
+    "ada": "dist/cli.js",
+    "auto-dev-agent": "dist/cli.js"
   },
+  "exports": {
+    ".": {
+      "types": "./dist/cli.d.ts",
+      "import": "./dist/cli.js"
+    },
+    "./config": {
+      "types": "./dist/config.d.ts",
+      "import": "./dist/config.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc",
     "start": "node dist/cli.js",
     "dev": "tsx src/cli.ts",
     "bundle": "esbuild src/cli.ts --bundle --platform=node --target=node18 --format=cjs --outfile=bundle/cli.cjs",
-    "pack:win": "npm run bundle && pkg bundle/cli.cjs --targets node18-win-x64 --output release/ada.exe"
+    "pack:win": "npm run bundle && pkg bundle/cli.cjs --targets node18-win-x64 --output release/ada.exe",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0",
@@ -25,5 +43,27 @@
     "esbuild": "^0.27.3",
     "tsx": "^4.19.0",
     "typescript": "^5.7.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "ai",
+    "agent",
+    "development",
+    "anthropic",
+    "claude",
+    "automation",
+    "devtools"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wavetry/auto-dev-agent.git"
+  },
+  "homepage": "https://github.com/wavetry/auto-dev-agent#readme",
+  "bugs": {
+    "url": "https://github.com/wavetry/auto-dev-agent/issues"
   }
 }
